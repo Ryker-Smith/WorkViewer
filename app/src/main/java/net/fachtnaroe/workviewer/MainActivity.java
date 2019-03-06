@@ -90,6 +90,10 @@ public class MainActivity extends Form implements HandlesEventDispatching {
                 RefreshButton_Click();
                 return true;
             }
+            else if (component.equals(buttonSmallRight)) {
+                startNewForm("Calendar", null);
+                return true;
+            }
         }
         else if( eventName.equals("fachtnaWebViewStringChange") ) {
             if (component.equals(webviewMainDisplay)) {

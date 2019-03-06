@@ -36,7 +36,7 @@ import com.google.appinventor.components.runtime.VerticalArrangement;
 
 public class Calendar extends Form implements HandlesEventDispatching {
 
-        private Button buttonRefresh;
+        private Button buttonRefresh, buttonReturn;
         private VerticalArrangement vargParent;
         private HorizontalArrangement hargTop;
         private fachtnaWebViewer webviewMainDisplay;
@@ -63,6 +63,9 @@ public class Calendar extends Form implements HandlesEventDispatching {
             buttonRefresh.Image("buttonRefresh.png");
             buttonRefresh.Width(50);
             buttonRefresh.Height(50);
+            buttonReturn = new Button(hargTop);
+            buttonReturn.Width(20);
+            buttonReturn.Height(20);
             padTwo=new Label(hargTop);
             // debugLabel and padTwo are used to centre the refresh button
             debugLabel.WidthPercent(40);
@@ -95,6 +98,10 @@ public class Calendar extends Form implements HandlesEventDispatching {
             if( eventName.equals("Click") ) {
                 if (component.equals(buttonRefresh)) {
                     RefreshButton_Click();
+                    return true;
+                }
+                else if (component.equals(buttonReturn)) {
+                    startNewForm("MainActivity", null);
                     return true;
                 }
             }
