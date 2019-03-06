@@ -41,8 +41,8 @@ public class Calendar extends Form implements HandlesEventDispatching {
         private HorizontalArrangement hargTop;
         private fachtnaWebViewer webviewMainDisplay;
         private Label debugLabel, padTwo;
-        private String ordering="calendar";
-        private String home_url="http://fachtnaroe.net:4567?ordering=" + ordering;
+        private String ordering="calendar/";
+        private String home_url="http://fachtnaroe.net:4567/" + ordering;
         private  String base_url="briefs/";
         String lastWebViewString="";
         Notifier messages;
