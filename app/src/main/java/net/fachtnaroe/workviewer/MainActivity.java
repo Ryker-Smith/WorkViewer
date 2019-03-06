@@ -17,13 +17,15 @@ import com.google.appinventor.components.runtime.VerticalArrangement;
 
 public class MainActivity extends Form implements HandlesEventDispatching {
 
-    private Button buttonRefresh;
+    private Button buttonRefresh, buttonSmallRight;
     private VerticalArrangement vargParent;
+    private VerticalArrangement vargRight;
     private HorizontalArrangement hargTop;
     private fachtnaWebViewer webviewMainDisplay;
     private Label debugLabel, padTwo;
-    private String home_url="http://fachtnaroe.net:4567";
-    private  String base_url="https://fachtnaroe.net/node/briefs/";
+    private String ordering="subject/";
+    private String home_url="http://fachtnaroe.net:4567/" + ordering;
+    private  String base_url="http://fachtnaroe.net:4567/briefs/";
     String lastWebViewString="";
     Notifier messages;
     private Integer colour_bad=Component.COLOR_RED;
@@ -43,13 +45,24 @@ public class MainActivity extends Form implements HandlesEventDispatching {
         buttonRefresh.Image("buttonRefresh.png");
         buttonRefresh.Width(50);
         buttonRefresh.Height(50);
-        padTwo=new Label(hargTop);
+        vargRight=new VerticalArrangement(hargTop);
+        vargRight.WidthPercent(30);
+        vargRight.AlignHorizontal(Component.ALIGNMENT_OPPOSITE);
+        padTwo=new Label(vargRight);
         // debugLabel and padTwo are used to centre the refresh button
-        debugLabel.WidthPercent(40);
+        padTwo.WidthPercent(100);
+        padTwo.FontSize(8);
+        padTwo.TextColor(Component.COLOR_WHITE);
+        padTwo.Text("Calendar");debugLabel.WidthPercent(40);
+        buttonSmallRight = new Button(vargRight);
+        buttonSmallRight.TextAlignment(Component.ALIGNMENT_CENTER);
+        buttonSmallRight.Width(20);
+        buttonSmallRight.Height(20);
+        buttonSmallRight.Image("buttonCalendar.png");
         debugLabel.TextColor(Component.COLOR_WHITE);
         debugLabel.Text("Debug");
         debugLabel.FontSize(8);
-        padTwo.WidthPercent(40);
+
         webviewMainDisplay = new fachtnaWebViewer(vargParent);
         webviewMainDisplay.UsesLocation(false);
         webviewMainDisplay.ClearCaches();
@@ -115,14 +128,13 @@ public class MainActivity extends Form implements HandlesEventDispatching {
             @Override
             public void run() {
                 // Stuff that updates the UI
-                debugLabel.Text( theString );
+                debugLabel.Text( base_url+theString );
                 // https://stackoverflow.com/questions/23240469/open-online-pdf-file-through-android-intent
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(base_url+theString));
                 startActivity(browserIntent);
             }
         });
     }
-
     void dbg (String debugMsg) {
         System.err.print( "~~~> " + debugMsg + " <~~~\n");
     }
